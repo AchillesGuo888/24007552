@@ -1,0 +1,19 @@
+{
+    "servicename":"cargo_decomposer",
+    "opserations":[
+        {"name":"ViewTracking"},
+        {"name":"ViewCargos"},
+        {"name":"BookCargo"},
+        {"name":"ChangeCargoDestination"},
+        {"name":"CreateLocation"},
+        {"name":"CreateVoyage"},
+        {"name":"AddCarrierMovement"},
+        {"name":"handleCargoEvent"},
+        {"name":"RouteCargo"}
+
+    ],
+    "resources":[
+        {"name":"meta"},
+        {"name":"data"}
+    ]
+}

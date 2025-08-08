@@ -1,0 +1,157 @@
+{
+    "name": "JPetStore",
+    "entities": [
+      {
+        "name": "Account",
+        "nanoentities": [
+          "username",
+          "password",
+          "email",
+          "firstName",
+          "lastName",
+          "status",
+          "address1",
+          "address2",
+          "city",
+          "state",
+          "zip",
+          "country",
+          "phone",
+          "favouriteCategoryId",
+          "languagePreference",
+          "listOption",
+          "bannerOption",
+          "bannerName"
+        ]
+      },
+      {
+        "name": "Cart",
+        "nanoentities": []
+      },
+      {
+        "name": "CartItem",
+        "nanoentities": [ "item", "quantity", "inStock", "total"]
+      },
+      {
+        "name": "Category",
+        "nanoentities": ["categoryId", "name", "description"]
+      },
+      {
+        "name": "Item",
+        "nanoentities": [
+          "itemId",
+          "productId",
+          "listPrice",
+          "unitCost",
+          "supplierId",
+          "status",
+          "attribute1",
+          "attribute2",
+          "attribute3",
+          "attribute4",
+          "attribute5",
+          "product",
+          "quantity"
+        ]
+      },
+      {
+        "name": "LineItem",
+        "nanoentities": [
+          "orderId",
+          "lineNumber",
+          "quantity",
+          "itemId",
+          "unitPrice",
+          "item",
+          "total"
+        ]
+      },
+      {
+        "name": "Order",
+        "nanoentities": [
+          "orderId",
+          "username",
+          "orderDate",
+          "shipAddress1",
+          "shipAddress2",
+          "shipCity",
+          "shipState",
+          "shipZip",
+          "shipCountry",
+          "billAddress1",
+          "billAddress2",
+          "billCity",
+          "billState",
+          "billZip",
+          "billCountry",
+          "courier",
+          "totalPrice",
+          "billToFirstName",
+          "billToLastName",
+          "shipToFirstName",
+          "shipToLastName",
+          "creditCard",
+          "expiryDate",
+          "cardType",
+          "locale",
+          "status"
+        ]
+      },
+      {
+        "name": "Product",
+        "nanoentities": ["productId", "categoryId", "name", "description"]
+      },
+      {
+        "name": "Sequence",
+        "nanoentities": ["name", "nextId"]
+      }
+    ],
+    "relations": [
+     {
+        "origin": "Order",
+        "destination": "Account",
+        "type": "AGGREGATION"
+      },
+      {
+        "origin": "Cart",
+        "destination": "CartItem",
+        "type": "COMPOSITION"
+      },
+  
+      {
+        "origin": "CartItem",
+        "destination": "Item",
+        "type": "AGGREGATION"
+      },
+      {
+        "origin": "Item",
+        "destination": "Product",
+        "type": "AGGREGATION"
+      },
+      {
+        "origin": "LineItem",
+        "destination": "CartItem",
+        "type": "COMPOSITION"
+      },
+      {
+        "origin": "Order",
+        "destination": "LineItem",
+        "type": "COMPOSITION"
+      },
+      {
+        "origin": "Product",
+        "destination": "Category",
+        "type": "AGGREGATION"
+      },
+      {
+        "origin": "Sequence",
+        "destination": "Account",
+        "type": "COMPOSITION"
+      },
+      {
+        "origin": "Sequence",
+        "destination": "Order",
+        "type": "COMPOSITION"
+      }
+    ]
+  }

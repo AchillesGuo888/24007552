@@ -1,0 +1,10 @@
+[customer];UserBlocks;0.38118562;
+[customer];UserBlocks;0.38118562;
+[customer, account];BankAccount;0.79623556;
+[customer, account];BankAccount;0.79623556;
+[accounts, customer];BankAccount;0.79623556;
+[accounts];DepositAccount;0.1;
+[transactions, history];ComputerLanguage;1.727985;
+[account];DepositAccount;0.1;
+[account];DepositAccount;0.1;
+[money, transfer];TransferAction;0.90983754;

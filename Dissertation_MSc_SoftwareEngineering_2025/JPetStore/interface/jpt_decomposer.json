@@ -1,0 +1,27 @@
+{
+
+    "serviceName": "jpt_decomposer",
+    "operations": [
+    {"name":"viewCategory"},
+    {"name":"viewProduct"},
+    {"name":"viewItem"},
+    {"name":"searchProducts"},
+    {"name":"addItemToCart"},
+    {"name":"removeItemFromCart"},
+    {"name":"updateCartQuantities"},
+    {"name":"viewCart"},
+    {"name":"checkOut"},
+    {"name":"listOrders"},
+    {"name":"newOrder"},
+    {"name":"viewOrder"},
+    {"name":"newAccount"},
+    {"name":"editAccount"},
+    {"name":"signon"},
+    {"name":"signoff"},
+    {"name":"isAuthenticated"}
+    ],
+    "resources": [
+    {"name":"meta"},
+    {"name":"data"}
+    ]
+   }

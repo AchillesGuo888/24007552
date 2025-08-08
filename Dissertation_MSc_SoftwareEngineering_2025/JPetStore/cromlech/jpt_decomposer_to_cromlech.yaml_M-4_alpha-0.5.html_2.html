@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 2500px;
+                 background-color: #dddddd;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"group": 2, "id": "updateCartQuantities", "label": "updateCartQuantities", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "addItemToCart", "label": "addItemToCart", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "viewCart", "label": "viewCart", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "viewItem", "label": "viewItem", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "getProductList", "label": "getProductList", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "searchProducts", "label": "searchProducts", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "setProductList", "label": "setProductList", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "getProductId", "label": "getProductId", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "removeItemFromCart", "label": "removeItemFromCart", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "CartItem.inStock@2", "label": "CartItem.inStock@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.item@2", "label": "CartItem.item@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.quantity@2", "label": "CartItem.quantity@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.total@2", "label": "CartItem.total@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute1;@2", "label": "Item.attribute1;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute2;@2", "label": "Item.attribute2;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute3;@2", "label": "Item.attribute3;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute4;@2", "label": "Item.attribute4;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute5;@2", "label": "Item.attribute5;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.itemId@2", "label": "Item.itemId@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.listPrice;@2", "label": "Item.listPrice;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.product;@2", "label": "Item.product;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.productId;@2", "label": "Item.productId;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.quantity;@2", "label": "Item.quantity;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.status;@2", "label": "Item.status;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.supplierId;@2", "label": "Item.supplierId;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.unitCost;@2", "label": "Item.unitCost;@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Product.categoryId@2", "label": "Product.categoryId@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Product.description@2", "label": "Product.description@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Product.name@2", "label": "Product.name@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Product.productId@2", "label": "Product.productId@2", "mass": 1.5, "shape": "square", "size": 8}]);
+                  edges = new vis.DataSet([{"from": "updateCartQuantities", "to": "CartItem.item@2"}, {"from": "updateCartQuantities", "to": "CartItem.quantity@2"}, {"from": "updateCartQuantities", "to": "CartItem.inStock@2"}, {"from": "updateCartQuantities", "to": "CartItem.total@2"}, {"from": "updateCartQuantities", "to": "Item.itemId@2"}, {"from": "updateCartQuantities", "to": "Item.productId;@2"}, {"from": "updateCartQuantities", "to": "Item.listPrice;@2"}, {"from": "updateCartQuantities", "to": "Item.unitCost;@2"}, {"from": "updateCartQuantities", "to": "Item.supplierId;@2"}, {"from": "updateCartQuantities", "to": "Item.status;@2"}, {"from": "updateCartQuantities", "to": "Item.attribute1;@2"}, {"from": "updateCartQuantities", "to": "Item.attribute2;@2"}, {"from": "updateCartQuantities", "to": "Item.attribute3;@2"}, {"from": "updateCartQuantities", "to": "Item.attribute4;@2"}, {"from": "updateCartQuantities", "to": "Item.attribute5;@2"}, {"from": "updateCartQuantities", "to": "Item.product;@2"}, {"from": "updateCartQuantities", "to": "Item.quantity;@2"}, {"from": "updateCartQuantities", "to": "Product.productId@2"}, {"from": "updateCartQuantities", "to": "Product.categoryId@2"}, {"from": "updateCartQuantities", "to": "Product.name@2"}, {"from": "updateCartQuantities", "to": "Product.description@2"}, {"from": "addItemToCart", "to": "CartItem.item@2"}, {"from": "addItemToCart", "to": "CartItem.quantity@2"}, {"from": "addItemToCart", "to": "CartItem.inStock@2"}, {"from": "addItemToCart", "to": "CartItem.total@2"}, {"from": "addItemToCart", "to": "Item.itemId@2"}, {"from": "addItemToCart", "to": "Item.productId;@2"}, {"from": "addItemToCart", "to": "Item.listPrice;@2"}, {"from": "addItemToCart", "to": "Item.unitCost;@2"}, {"from": "addItemToCart", "to": "Item.supplierId;@2"}, {"from": "addItemToCart", "to": "Item.status;@2"}, {"from": "addItemToCart", "to": "Item.attribute1;@2"}, {"from": "addItemToCart", "to": "Item.attribute2;@2"}, {"from": "addItemToCart", "to": "Item.attribute3;@2"}, {"from": "addItemToCart", "to": "Item.attribute4;@2"}, {"from": "addItemToCart", "to": "Item.attribute5;@2"}, {"from": "addItemToCart", "to": "Item.product;@2"}, {"from": "addItemToCart", "to": "Item.quantity;@2"}, {"from": "addItemToCart", "to": "Product.productId@2"}, {"from": "addItemToCart", "to": "Product.categoryId@2"}, {"from": "addItemToCart", "to": "Product.name@2"}, {"from": "addItemToCart", "to": "Product.description@2"}, {"from": "viewCart", "to": "CartItem.item@2"}, {"from": "viewCart", "to": "CartItem.quantity@2"}, {"from": "viewCart", "to": "CartItem.inStock@2"}, {"from": "viewCart", "to": "CartItem.total@2"}, {"from": "viewCart", "to": "Item.itemId@2"}, {"from": "viewCart", "to": "Item.productId;@2"}, {"from": "viewCart", "to": "Item.listPrice;@2"}, {"from": "viewCart", "to": "Item.unitCost;@2"}, {"from": "viewCart", "to": "Item.supplierId;@2"}, {"from": "viewCart", "to": "Item.status;@2"}, {"from": "viewCart", "to": "Item.attribute1;@2"}, {"from": "viewCart", "to": "Item.attribute2;@2"}, {"from": "viewCart", "to": "Item.attribute3;@2"}, {"from": "viewCart", "to": "Item.attribute4;@2"}, {"from": "viewCart", "to": "Item.attribute5;@2"}, {"from": "viewCart", "to": "Item.product;@2"}, {"from": "viewCart", "to": "Item.quantity;@2"}, {"from": "viewCart", "to": "Product.productId@2"}, {"from": "viewCart", "to": "Product.categoryId@2"}, {"from": "viewCart", "to": "Product.name@2"}, {"from": "viewCart", "to": "Product.description@2"}, {"from": "viewItem", "to": "Item.itemId@2"}, {"from": "viewItem", "to": "Item.productId;@2"}, {"from": "viewItem", "to": "Item.listPrice;@2"}, {"from": "viewItem", "to": "Item.unitCost;@2"}, {"from": "viewItem", "to": "Item.supplierId;@2"}, {"from": "viewItem", "to": "Item.status;@2"}, {"from": "viewItem", "to": "Item.attribute1;@2"}, {"from": "viewItem", "to": "Item.attribute2;@2"}, {"from": "viewItem", "to": "Item.attribute3;@2"}, {"from": "viewItem", "to": "Item.attribute4;@2"}, {"from": "viewItem", "to": "Item.attribute5;@2"}, {"from": "viewItem", "to": "Item.product;@2"}, {"from": "viewItem", "to": "Item.quantity;@2"}, {"from": "viewItem", "to": "Product.productId@2"}, {"from": "viewItem", "to": "Product.categoryId@2"}, {"from": "viewItem", "to": "Product.name@2"}, {"from": "viewItem", "to": "Product.description@2"}, {"from": "getProductList", "to": "Product.productId@2"}, {"from": "getProductList", "to": "Product.categoryId@2"}, {"from": "getProductList", "to": "Product.name@2"}, {"from": "getProductList", "to": "Product.description@2"}, {"from": "searchProducts", "to": "Product.productId@2"}, {"from": "searchProducts", "to": "Product.categoryId@2"}, {"from": "searchProducts", "to": "Product.name@2"}, {"from": "searchProducts", "to": "Product.description@2"}, {"from": "setProductList", "to": "Product.productId@2"}, {"from": "setProductList", "to": "Product.categoryId@2"}, {"from": "setProductList", "to": "Product.name@2"}, {"from": "setProductList", "to": "Product.description@2"}, {"from": "getProductId", "to": "Product.productId@2"}, {"from": "removeItemFromCart", "to": "CartItem.item@2"}, {"from": "removeItemFromCart", "to": "CartItem.quantity@2"}, {"from": "removeItemFromCart", "to": "CartItem.inStock@2"}, {"from": "removeItemFromCart", "to": "CartItem.total@2"}, {"from": "removeItemFromCart", "to": "Item.itemId@2"}, {"from": "removeItemFromCart", "to": "Item.productId;@2"}, {"from": "removeItemFromCart", "to": "Item.listPrice;@2"}, {"from": "removeItemFromCart", "to": "Item.unitCost;@2"}, {"from": "removeItemFromCart", "to": "Item.supplierId;@2"}, {"from": "removeItemFromCart", "to": "Item.status;@2"}, {"from": "removeItemFromCart", "to": "Item.attribute1;@2"}, {"from": "removeItemFromCart", "to": "Item.attribute2;@2"}, {"from": "removeItemFromCart", "to": "Item.attribute3;@2"}, {"from": "removeItemFromCart", "to": "Item.attribute4;@2"}, {"from": "removeItemFromCart", "to": "Item.attribute5;@2"}, {"from": "removeItemFromCart", "to": "Item.product;@2"}, {"from": "removeItemFromCart", "to": "Item.quantity;@2"}, {"from": "removeItemFromCart", "to": "Product.productId@2"}, {"from": "removeItemFromCart", "to": "Product.categoryId@2"}, {"from": "removeItemFromCart", "to": "Product.name@2"}, {"from": "removeItemFromCart", "to": "Product.description@2"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

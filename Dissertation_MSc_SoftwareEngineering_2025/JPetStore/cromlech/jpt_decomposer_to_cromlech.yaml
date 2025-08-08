@@ -1,0 +1,612 @@
+operations:
+- name: getAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Account
+    read_attributes:
+    - address1
+    - username;
+    - password;
+    - email;
+    - firstName;
+    - lastName;
+    - status;
+    - address1;
+    - address2;
+    - city;
+    - state;
+    - zip;
+    - country;
+    - phone;
+    - favouriteCategoryId;
+    - languagePreference;
+    - listOption;
+    - bannerOption;
+    - bannerName;
+- name: newAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Account
+    write_attributes:
+    - address1
+    - username;
+    - password;
+    - email;
+    - firstName;
+    - lastName;
+    - status;
+    - address1;
+    - address2;
+    - city;
+    - state;
+    - zip;
+    - country;
+    - phone;
+    - favouriteCategoryId;
+    - languagePreference;
+    - listOption;
+    - bannerOption;
+    - bannerName;
+- name: editAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Account
+    write_attributes:
+    - address1
+    - username;
+    - password;
+    - email;
+    - firstName;
+    - lastName;
+    - status;
+    - address1;
+    - address2;
+    - city;
+    - state;
+    - zip;
+    - country;
+    - phone;
+    - favouriteCategoryId;
+    - languagePreference;
+    - listOption;
+    - bannerOption;
+    - bannerName;  
+- name: updateCartQuantities
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CartItem
+    read_attributes:
+    - item
+    - quantity
+    - inStock
+    - total
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: addItemToCart
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CartItem
+    read_attributes:
+    - item
+    - quantity
+    - inStock
+    - total
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: getItemList
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+- name: getOrderId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Order
+    read_attributes:
+    - address1
+    - orderId;
+    - username;
+    - orderDate;
+    - shipAddress1;
+    - shipAddress2;
+    - shipCity;
+    - shipState;
+    - shipZip;
+    - shipCountry;
+    - billAddress1;
+    - billAddress2;
+    - billCity;
+    - billState;
+    - billZip;
+    - billCountry;
+    - courier;
+    - totalPrice;
+    - billToFirstName;
+    - billToLastName;
+    - shipToFirstName;
+    - shipToLastName;
+    - creditCard;
+    - expiryDate;
+    - cardType;
+    - locale;
+    - status;
+    - lineItems
+  - entity_name: LineItem   
+    read_attributes:
+    - orderId 
+    - lineNumber;
+    - quantity;
+    - itemId;
+    - unitPrice;
+    - item;
+    - total;
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+- name: viewCart
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CartItem
+    read_attributes:
+    - item
+    - quantity
+    - inStock
+    - total
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: viewCategory
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+  - entity_name: Category
+    read_attributes:
+    - categoryId
+    - name
+    - description
+- name: getCategoryId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Category
+    read_attributes:
+    - categoryId
+- name: setCategoryId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Category
+    read_attributes:
+    - categoryId
+    - name
+    - description
+- name: viewItem
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: viewOrder
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Order
+    read_attributes:
+    - address1
+    - orderId;
+    - username;
+    - orderDate;
+    - shipAddress1;
+    - shipAddress2;
+    - shipCity;
+    - shipState;
+    - shipZip;
+    - shipCountry;
+    - billAddress1;
+    - billAddress2;
+    - billCity;
+    - billState;
+    - billZip;
+    - billCountry;
+    - courier;
+    - totalPrice;
+    - billToFirstName;
+    - billToLastName;
+    - shipToFirstName;
+    - shipToLastName;
+    - creditCard;
+    - expiryDate;
+    - cardType;
+    - locale;
+    - status;
+    - lineItems
+  - entity_name: LineItem   
+    read_attributes:
+    - orderId 
+    - lineNumber;
+    - quantity;
+    - itemId;
+    - unitPrice;
+    - item;
+    - total;
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+- name: getItemId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Item
+    read_attributes:
+    - itemId   
+- name: getProductList
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: setCategoryList
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Category
+    read_attributes:
+    - categoryId
+    - name
+    - description
+- name: setItemList
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+- name: setItemId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Item
+    read_attributes:
+    - itemId
+- name: searchProducts
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: setProductList
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: getProductId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Product
+    read_attributes:
+    - productId
+- name: removeItemFromCart
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  database_access:
+  - entity_name: CartItem
+    read_attributes:
+    - item
+    - quantity
+    - inStock
+    - total
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+  - entity_name: Product
+    read_attributes:
+    - productId
+    - categoryId
+    - name
+    - description
+- name: setOrder
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Order
+    read_attributes:
+    - address1
+    - orderId;
+    - username;
+    - orderDate;
+    - shipAddress1;
+    - shipAddress2;
+    - shipCity;
+    - shipState;
+    - shipZip;
+    - shipCountry;
+    - billAddress1;
+    - billAddress2;
+    - billCity;
+    - billState;
+    - billZip;
+    - billCountry;
+    - courier;
+    - totalPrice;
+    - billToFirstName;
+    - billToLastName;
+    - shipToFirstName;
+    - shipToLastName;
+    - creditCard;
+    - expiryDate;
+    - cardType;
+    - locale;
+    - status;
+    - lineItems
+  - entity_name: LineItem   
+    read_attributes:
+    - orderId 
+    - lineNumber;
+    - quantity;
+    - itemId;
+    - unitPrice;
+    - item;
+    - total;
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+- name: setProductId
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Order
+    read_attributes:
+    - address1
+    - orderId;
+    - username;
+    - orderDate;
+    - shipAddress1;
+    - shipAddress2;
+    - shipCity;
+    - shipState;
+    - shipZip;
+    - shipCountry;
+    - billAddress1;
+    - billAddress2;
+    - billCity;
+    - billState;
+    - billZip;
+    - billCountry;
+    - courier;
+    - totalPrice;
+    - billToFirstName;
+    - billToLastName;
+    - shipToFirstName;
+    - shipToLastName;
+    - creditCard;
+    - expiryDate;
+    - cardType;
+    - locale;
+    - status;
+    - lineItems
+  - entity_name: LineItem   
+    read_attributes:
+    - orderId 
+    - lineNumber;
+    - quantity;
+    - itemId;
+    - unitPrice;
+    - item;
+    - total;
+  - entity_name: Item
+    read_attributes:
+    - itemId
+    - productId;
+    - listPrice;
+    - unitCost;
+    - supplierId;
+    - status;
+    - attribute1;
+    - attribute2;
+    - attribute3;
+    - attribute4;
+    - attribute5;
+    - product;
+    - quantity;
+

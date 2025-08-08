@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 2500px;
+                 background-color: #dddddd;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"group": 1, "id": "getItemList", "label": "getItemList", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "getOrderId", "label": "getOrderId", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "viewOrder", "label": "viewOrder", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "getItemId", "label": "getItemId", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "setItemList", "label": "setItemList", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "setItemId", "label": "setItemId", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "setOrder", "label": "setOrder", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "setProductId", "label": "setProductId", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 1, "id": "Item.attribute1;@1", "label": "Item.attribute1;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.attribute2;@1", "label": "Item.attribute2;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.attribute3;@1", "label": "Item.attribute3;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.attribute4;@1", "label": "Item.attribute4;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.attribute5;@1", "label": "Item.attribute5;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.itemId@1", "label": "Item.itemId@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.listPrice;@1", "label": "Item.listPrice;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.product;@1", "label": "Item.product;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.productId;@1", "label": "Item.productId;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.quantity;@1", "label": "Item.quantity;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.status;@1", "label": "Item.status;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.supplierId;@1", "label": "Item.supplierId;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Item.unitCost;@1", "label": "Item.unitCost;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.item;@1", "label": "LineItem.item;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.itemId;@1", "label": "LineItem.itemId;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.lineNumber;@1", "label": "LineItem.lineNumber;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.orderId@1", "label": "LineItem.orderId@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.quantity;@1", "label": "LineItem.quantity;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.total;@1", "label": "LineItem.total;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "LineItem.unitPrice;@1", "label": "LineItem.unitPrice;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.address1@1", "label": "Order.address1@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billAddress1;@1", "label": "Order.billAddress1;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billAddress2;@1", "label": "Order.billAddress2;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billCity;@1", "label": "Order.billCity;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billCountry;@1", "label": "Order.billCountry;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billState;@1", "label": "Order.billState;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billToFirstName;@1", "label": "Order.billToFirstName;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billToLastName;@1", "label": "Order.billToLastName;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.billZip;@1", "label": "Order.billZip;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.cardType;@1", "label": "Order.cardType;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.courier;@1", "label": "Order.courier;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.creditCard;@1", "label": "Order.creditCard;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.expiryDate;@1", "label": "Order.expiryDate;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.lineItems@1", "label": "Order.lineItems@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.locale;@1", "label": "Order.locale;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.orderDate;@1", "label": "Order.orderDate;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.orderId;@1", "label": "Order.orderId;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipAddress1;@1", "label": "Order.shipAddress1;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipAddress2;@1", "label": "Order.shipAddress2;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipCity;@1", "label": "Order.shipCity;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipCountry;@1", "label": "Order.shipCountry;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipState;@1", "label": "Order.shipState;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipToFirstName;@1", "label": "Order.shipToFirstName;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipToLastName;@1", "label": "Order.shipToLastName;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.shipZip;@1", "label": "Order.shipZip;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.status;@1", "label": "Order.status;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.totalPrice;@1", "label": "Order.totalPrice;@1", "mass": 1.5, "shape": "square", "size": 8}, {"group": 1, "id": "Order.username;@1", "label": "Order.username;@1", "mass": 1.5, "shape": "square", "size": 8}]);
+                  edges = new vis.DataSet([{"from": "getItemList", "to": "Item.itemId@1"}, {"from": "getItemList", "to": "Item.productId;@1"}, {"from": "getItemList", "to": "Item.listPrice;@1"}, {"from": "getItemList", "to": "Item.unitCost;@1"}, {"from": "getItemList", "to": "Item.supplierId;@1"}, {"from": "getItemList", "to": "Item.status;@1"}, {"from": "getItemList", "to": "Item.attribute1;@1"}, {"from": "getItemList", "to": "Item.attribute2;@1"}, {"from": "getItemList", "to": "Item.attribute3;@1"}, {"from": "getItemList", "to": "Item.attribute4;@1"}, {"from": "getItemList", "to": "Item.attribute5;@1"}, {"from": "getItemList", "to": "Item.product;@1"}, {"from": "getItemList", "to": "Item.quantity;@1"}, {"from": "getOrderId", "to": "Order.address1@1"}, {"from": "getOrderId", "to": "Order.orderId;@1"}, {"from": "getOrderId", "to": "Order.username;@1"}, {"from": "getOrderId", "to": "Order.orderDate;@1"}, {"from": "getOrderId", "to": "Order.shipAddress1;@1"}, {"from": "getOrderId", "to": "Order.shipAddress2;@1"}, {"from": "getOrderId", "to": "Order.shipCity;@1"}, {"from": "getOrderId", "to": "Order.shipState;@1"}, {"from": "getOrderId", "to": "Order.shipZip;@1"}, {"from": "getOrderId", "to": "Order.shipCountry;@1"}, {"from": "getOrderId", "to": "Order.billAddress1;@1"}, {"from": "getOrderId", "to": "Order.billAddress2;@1"}, {"from": "getOrderId", "to": "Order.billCity;@1"}, {"from": "getOrderId", "to": "Order.billState;@1"}, {"from": "getOrderId", "to": "Order.billZip;@1"}, {"from": "getOrderId", "to": "Order.billCountry;@1"}, {"from": "getOrderId", "to": "Order.courier;@1"}, {"from": "getOrderId", "to": "Order.totalPrice;@1"}, {"from": "getOrderId", "to": "Order.billToFirstName;@1"}, {"from": "getOrderId", "to": "Order.billToLastName;@1"}, {"from": "getOrderId", "to": "Order.shipToFirstName;@1"}, {"from": "getOrderId", "to": "Order.shipToLastName;@1"}, {"from": "getOrderId", "to": "Order.creditCard;@1"}, {"from": "getOrderId", "to": "Order.expiryDate;@1"}, {"from": "getOrderId", "to": "Order.cardType;@1"}, {"from": "getOrderId", "to": "Order.locale;@1"}, {"from": "getOrderId", "to": "Order.status;@1"}, {"from": "getOrderId", "to": "Order.lineItems@1"}, {"from": "getOrderId", "to": "LineItem.orderId@1"}, {"from": "getOrderId", "to": "LineItem.lineNumber;@1"}, {"from": "getOrderId", "to": "LineItem.quantity;@1"}, {"from": "getOrderId", "to": "LineItem.itemId;@1"}, {"from": "getOrderId", "to": "LineItem.unitPrice;@1"}, {"from": "getOrderId", "to": "LineItem.item;@1"}, {"from": "getOrderId", "to": "LineItem.total;@1"}, {"from": "getOrderId", "to": "Item.itemId@1"}, {"from": "getOrderId", "to": "Item.productId;@1"}, {"from": "getOrderId", "to": "Item.listPrice;@1"}, {"from": "getOrderId", "to": "Item.unitCost;@1"}, {"from": "getOrderId", "to": "Item.supplierId;@1"}, {"from": "getOrderId", "to": "Item.status;@1"}, {"from": "getOrderId", "to": "Item.attribute1;@1"}, {"from": "getOrderId", "to": "Item.attribute2;@1"}, {"from": "getOrderId", "to": "Item.attribute3;@1"}, {"from": "getOrderId", "to": "Item.attribute4;@1"}, {"from": "getOrderId", "to": "Item.attribute5;@1"}, {"from": "getOrderId", "to": "Item.product;@1"}, {"from": "getOrderId", "to": "Item.quantity;@1"}, {"from": "viewOrder", "to": "Order.address1@1"}, {"from": "viewOrder", "to": "Order.orderId;@1"}, {"from": "viewOrder", "to": "Order.username;@1"}, {"from": "viewOrder", "to": "Order.orderDate;@1"}, {"from": "viewOrder", "to": "Order.shipAddress1;@1"}, {"from": "viewOrder", "to": "Order.shipAddress2;@1"}, {"from": "viewOrder", "to": "Order.shipCity;@1"}, {"from": "viewOrder", "to": "Order.shipState;@1"}, {"from": "viewOrder", "to": "Order.shipZip;@1"}, {"from": "viewOrder", "to": "Order.shipCountry;@1"}, {"from": "viewOrder", "to": "Order.billAddress1;@1"}, {"from": "viewOrder", "to": "Order.billAddress2;@1"}, {"from": "viewOrder", "to": "Order.billCity;@1"}, {"from": "viewOrder", "to": "Order.billState;@1"}, {"from": "viewOrder", "to": "Order.billZip;@1"}, {"from": "viewOrder", "to": "Order.billCountry;@1"}, {"from": "viewOrder", "to": "Order.courier;@1"}, {"from": "viewOrder", "to": "Order.totalPrice;@1"}, {"from": "viewOrder", "to": "Order.billToFirstName;@1"}, {"from": "viewOrder", "to": "Order.billToLastName;@1"}, {"from": "viewOrder", "to": "Order.shipToFirstName;@1"}, {"from": "viewOrder", "to": "Order.shipToLastName;@1"}, {"from": "viewOrder", "to": "Order.creditCard;@1"}, {"from": "viewOrder", "to": "Order.expiryDate;@1"}, {"from": "viewOrder", "to": "Order.cardType;@1"}, {"from": "viewOrder", "to": "Order.locale;@1"}, {"from": "viewOrder", "to": "Order.status;@1"}, {"from": "viewOrder", "to": "Order.lineItems@1"}, {"from": "viewOrder", "to": "LineItem.orderId@1"}, {"from": "viewOrder", "to": "LineItem.lineNumber;@1"}, {"from": "viewOrder", "to": "LineItem.quantity;@1"}, {"from": "viewOrder", "to": "LineItem.itemId;@1"}, {"from": "viewOrder", "to": "LineItem.unitPrice;@1"}, {"from": "viewOrder", "to": "LineItem.item;@1"}, {"from": "viewOrder", "to": "LineItem.total;@1"}, {"from": "viewOrder", "to": "Item.itemId@1"}, {"from": "viewOrder", "to": "Item.productId;@1"}, {"from": "viewOrder", "to": "Item.listPrice;@1"}, {"from": "viewOrder", "to": "Item.unitCost;@1"}, {"from": "viewOrder", "to": "Item.supplierId;@1"}, {"from": "viewOrder", "to": "Item.status;@1"}, {"from": "viewOrder", "to": "Item.attribute1;@1"}, {"from": "viewOrder", "to": "Item.attribute2;@1"}, {"from": "viewOrder", "to": "Item.attribute3;@1"}, {"from": "viewOrder", "to": "Item.attribute4;@1"}, {"from": "viewOrder", "to": "Item.attribute5;@1"}, {"from": "viewOrder", "to": "Item.product;@1"}, {"from": "viewOrder", "to": "Item.quantity;@1"}, {"from": "getItemId", "to": "Item.itemId@1"}, {"from": "setItemList", "to": "Item.itemId@1"}, {"from": "setItemList", "to": "Item.productId;@1"}, {"from": "setItemList", "to": "Item.listPrice;@1"}, {"from": "setItemList", "to": "Item.unitCost;@1"}, {"from": "setItemList", "to": "Item.supplierId;@1"}, {"from": "setItemList", "to": "Item.status;@1"}, {"from": "setItemList", "to": "Item.attribute1;@1"}, {"from": "setItemList", "to": "Item.attribute2;@1"}, {"from": "setItemList", "to": "Item.attribute3;@1"}, {"from": "setItemList", "to": "Item.attribute4;@1"}, {"from": "setItemList", "to": "Item.attribute5;@1"}, {"from": "setItemList", "to": "Item.product;@1"}, {"from": "setItemList", "to": "Item.quantity;@1"}, {"from": "setItemId", "to": "Item.itemId@1"}, {"from": "setOrder", "to": "Order.address1@1"}, {"from": "setOrder", "to": "Order.orderId;@1"}, {"from": "setOrder", "to": "Order.username;@1"}, {"from": "setOrder", "to": "Order.orderDate;@1"}, {"from": "setOrder", "to": "Order.shipAddress1;@1"}, {"from": "setOrder", "to": "Order.shipAddress2;@1"}, {"from": "setOrder", "to": "Order.shipCity;@1"}, {"from": "setOrder", "to": "Order.shipState;@1"}, {"from": "setOrder", "to": "Order.shipZip;@1"}, {"from": "setOrder", "to": "Order.shipCountry;@1"}, {"from": "setOrder", "to": "Order.billAddress1;@1"}, {"from": "setOrder", "to": "Order.billAddress2;@1"}, {"from": "setOrder", "to": "Order.billCity;@1"}, {"from": "setOrder", "to": "Order.billState;@1"}, {"from": "setOrder", "to": "Order.billZip;@1"}, {"from": "setOrder", "to": "Order.billCountry;@1"}, {"from": "setOrder", "to": "Order.courier;@1"}, {"from": "setOrder", "to": "Order.totalPrice;@1"}, {"from": "setOrder", "to": "Order.billToFirstName;@1"}, {"from": "setOrder", "to": "Order.billToLastName;@1"}, {"from": "setOrder", "to": "Order.shipToFirstName;@1"}, {"from": "setOrder", "to": "Order.shipToLastName;@1"}, {"from": "setOrder", "to": "Order.creditCard;@1"}, {"from": "setOrder", "to": "Order.expiryDate;@1"}, {"from": "setOrder", "to": "Order.cardType;@1"}, {"from": "setOrder", "to": "Order.locale;@1"}, {"from": "setOrder", "to": "Order.status;@1"}, {"from": "setOrder", "to": "Order.lineItems@1"}, {"from": "setOrder", "to": "LineItem.orderId@1"}, {"from": "setOrder", "to": "LineItem.lineNumber;@1"}, {"from": "setOrder", "to": "LineItem.quantity;@1"}, {"from": "setOrder", "to": "LineItem.itemId;@1"}, {"from": "setOrder", "to": "LineItem.unitPrice;@1"}, {"from": "setOrder", "to": "LineItem.item;@1"}, {"from": "setOrder", "to": "LineItem.total;@1"}, {"from": "setOrder", "to": "Item.itemId@1"}, {"from": "setOrder", "to": "Item.productId;@1"}, {"from": "setOrder", "to": "Item.listPrice;@1"}, {"from": "setOrder", "to": "Item.unitCost;@1"}, {"from": "setOrder", "to": "Item.supplierId;@1"}, {"from": "setOrder", "to": "Item.status;@1"}, {"from": "setOrder", "to": "Item.attribute1;@1"}, {"from": "setOrder", "to": "Item.attribute2;@1"}, {"from": "setOrder", "to": "Item.attribute3;@1"}, {"from": "setOrder", "to": "Item.attribute4;@1"}, {"from": "setOrder", "to": "Item.attribute5;@1"}, {"from": "setOrder", "to": "Item.product;@1"}, {"from": "setOrder", "to": "Item.quantity;@1"}, {"from": "setProductId", "to": "Order.address1@1"}, {"from": "setProductId", "to": "Order.orderId;@1"}, {"from": "setProductId", "to": "Order.username;@1"}, {"from": "setProductId", "to": "Order.orderDate;@1"}, {"from": "setProductId", "to": "Order.shipAddress1;@1"}, {"from": "setProductId", "to": "Order.shipAddress2;@1"}, {"from": "setProductId", "to": "Order.shipCity;@1"}, {"from": "setProductId", "to": "Order.shipState;@1"}, {"from": "setProductId", "to": "Order.shipZip;@1"}, {"from": "setProductId", "to": "Order.shipCountry;@1"}, {"from": "setProductId", "to": "Order.billAddress1;@1"}, {"from": "setProductId", "to": "Order.billAddress2;@1"}, {"from": "setProductId", "to": "Order.billCity;@1"}, {"from": "setProductId", "to": "Order.billState;@1"}, {"from": "setProductId", "to": "Order.billZip;@1"}, {"from": "setProductId", "to": "Order.billCountry;@1"}, {"from": "setProductId", "to": "Order.courier;@1"}, {"from": "setProductId", "to": "Order.totalPrice;@1"}, {"from": "setProductId", "to": "Order.billToFirstName;@1"}, {"from": "setProductId", "to": "Order.billToLastName;@1"}, {"from": "setProductId", "to": "Order.shipToFirstName;@1"}, {"from": "setProductId", "to": "Order.shipToLastName;@1"}, {"from": "setProductId", "to": "Order.creditCard;@1"}, {"from": "setProductId", "to": "Order.expiryDate;@1"}, {"from": "setProductId", "to": "Order.cardType;@1"}, {"from": "setProductId", "to": "Order.locale;@1"}, {"from": "setProductId", "to": "Order.status;@1"}, {"from": "setProductId", "to": "Order.lineItems@1"}, {"from": "setProductId", "to": "LineItem.orderId@1"}, {"from": "setProductId", "to": "LineItem.lineNumber;@1"}, {"from": "setProductId", "to": "LineItem.quantity;@1"}, {"from": "setProductId", "to": "LineItem.itemId;@1"}, {"from": "setProductId", "to": "LineItem.unitPrice;@1"}, {"from": "setProductId", "to": "LineItem.item;@1"}, {"from": "setProductId", "to": "LineItem.total;@1"}, {"from": "setProductId", "to": "Item.itemId@1"}, {"from": "setProductId", "to": "Item.productId;@1"}, {"from": "setProductId", "to": "Item.listPrice;@1"}, {"from": "setProductId", "to": "Item.unitCost;@1"}, {"from": "setProductId", "to": "Item.supplierId;@1"}, {"from": "setProductId", "to": "Item.status;@1"}, {"from": "setProductId", "to": "Item.attribute1;@1"}, {"from": "setProductId", "to": "Item.attribute2;@1"}, {"from": "setProductId", "to": "Item.attribute3;@1"}, {"from": "setProductId", "to": "Item.attribute4;@1"}, {"from": "setProductId", "to": "Item.attribute5;@1"}, {"from": "setProductId", "to": "Item.product;@1"}, {"from": "setProductId", "to": "Item.quantity;@1"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

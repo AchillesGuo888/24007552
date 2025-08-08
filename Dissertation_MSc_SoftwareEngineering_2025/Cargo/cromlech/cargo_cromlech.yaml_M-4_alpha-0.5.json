@@ -1,0 +1,91 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "CarrierMovement.arrivalLocation",
+        "CarrierMovement.arrivalTime",
+        "CarrierMovement.departureLocation",
+        "CarrierMovement.departureTime",
+        "Delivery.routingStatus",
+        "Itinerary.itineraryNumber",
+        "Location.unLocode",
+        "RouteSpecification.arrivalDeadline",
+        "RouteSpecification.destination",
+        "RouteSpecification.origin",
+        "Voyage.voyageNumber"
+      ],
+      "id": "A",
+      "name": "Service A"
+    },
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "Delivery.estimatedArrivalTime",
+        "Delivery.misdirected",
+        "Delivery.routingStatus",
+        "Delivery.transportStatus",
+        "HandlingEvent.completionTime",
+        "HandlingEvent.location",
+        "HandlingEvent.type",
+        "RouteSpecification.destination",
+        "Voyage.voyageNumber"
+      ],
+      "id": "B",
+      "name": "Service B"
+    },
+    {
+      "nanoentities": [
+        "Location.unLocode"
+      ],
+      "id": "C",
+      "name": "Service C"
+    }
+  ],
+  "relations": [
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service B",
+      "sharedEntities": [
+        "Cargo.trackingId",
+        "Delivery.routingStatus",
+        "Voyage.voyageNumber"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service B",
+      "sharedEntities": [
+        "RouteSpecification.destination"
+      ],
+      "direction": "OUTGOING"
+    },
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "Location.unLocode"
+      ],
+      "direction": "BIDIRECTIONAL"
+    }
+  ],
+  "useCaseResponsibility": {
+    "Service A": [
+      "ViewCargos",
+      "BookCargo",
+      "ChangeCargoDestination",
+      "RouteCargo",
+      "AddCarrierMovement"
+    ],
+    "Service B": [
+      "ViewTracking",
+      "Create Voyage",
+      "handleCargoEvent"
+    ],
+    "Service C": [
+      "Create Location"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+[view, tracking];ViewAction;1.0;
+[view, cargos];ViewAction;0.9506327;
+[book, cargo];BookStore;0.80814743;
+[change, cargo, destination];TouristInformationCenter;2.3810449;
+[location];LocationFeatureSpecification;0.2;
+[voyage];BusTrip;0.5660171;
+[carrier, movement];MedicalOrganization;1.479697;
+[handle, cargo, event];EventStatusType;1.7887241;
+[route, cargo];BusTrip;1.3524518;

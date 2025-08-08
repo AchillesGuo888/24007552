@@ -1,0 +1,4 @@
+jpt;Intangible;3
+jpt;Action;9
+jpt;Product;2
+jpt;FinancialProduct;2

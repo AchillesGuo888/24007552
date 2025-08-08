@@ -1,0 +1,191 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "Category.categoryId",
+        "Category.description",
+        "Category.name",
+        "Product.categoryId",
+        "Product.description",
+        "Product.name",
+        "Product.productId"
+      ],
+      "id": "A",
+      "name": "Service A"
+    },
+    {
+      "nanoentities": [
+        "Item.attribute1;",
+        "Item.attribute2;",
+        "Item.attribute3;",
+        "Item.attribute4;",
+        "Item.attribute5;",
+        "Item.itemId",
+        "Item.listPrice;",
+        "Item.product;",
+        "Item.productId;",
+        "Item.quantity;",
+        "Item.status;",
+        "Item.supplierId;",
+        "Item.unitCost;",
+        "LineItem.item;",
+        "LineItem.itemId;",
+        "LineItem.lineNumber;",
+        "LineItem.orderId",
+        "LineItem.quantity;",
+        "LineItem.total;",
+        "LineItem.unitPrice;",
+        "Order.address1",
+        "Order.billAddress1;",
+        "Order.billAddress2;",
+        "Order.billCity;",
+        "Order.billCountry;",
+        "Order.billState;",
+        "Order.billToFirstName;",
+        "Order.billToLastName;",
+        "Order.billZip;",
+        "Order.cardType;",
+        "Order.courier;",
+        "Order.creditCard;",
+        "Order.expiryDate;",
+        "Order.lineItems",
+        "Order.locale;",
+        "Order.orderDate;",
+        "Order.orderId;",
+        "Order.shipAddress1;",
+        "Order.shipAddress2;",
+        "Order.shipCity;",
+        "Order.shipCountry;",
+        "Order.shipState;",
+        "Order.shipToFirstName;",
+        "Order.shipToLastName;",
+        "Order.shipZip;",
+        "Order.status;",
+        "Order.totalPrice;",
+        "Order.username;"
+      ],
+      "id": "B",
+      "name": "Service B"
+    },
+    {
+      "nanoentities": [
+        "CartItem.inStock",
+        "CartItem.item",
+        "CartItem.quantity",
+        "CartItem.total",
+        "Item.attribute1;",
+        "Item.attribute2;",
+        "Item.attribute3;",
+        "Item.attribute4;",
+        "Item.attribute5;",
+        "Item.itemId",
+        "Item.listPrice;",
+        "Item.product;",
+        "Item.productId;",
+        "Item.quantity;",
+        "Item.status;",
+        "Item.supplierId;",
+        "Item.unitCost;",
+        "Product.categoryId",
+        "Product.description",
+        "Product.name",
+        "Product.productId"
+      ],
+      "id": "C",
+      "name": "Service C"
+    },
+    {
+      "nanoentities": [
+        "Account.address1",
+        "Account.address1;",
+        "Account.address2;",
+        "Account.bannerName;",
+        "Account.bannerOption;",
+        "Account.city;",
+        "Account.country;",
+        "Account.email;",
+        "Account.favouriteCategoryId;",
+        "Account.firstName;",
+        "Account.languagePreference;",
+        "Account.lastName;",
+        "Account.listOption;",
+        "Account.password;",
+        "Account.phone;",
+        "Account.state;",
+        "Account.status;",
+        "Account.username;",
+        "Account.zip;"
+      ],
+      "id": "D",
+      "name": "Service D"
+    }
+  ],
+  "relations": [
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "Product.categoryId",
+        "Product.description",
+        "Product.name",
+        "Product.productId"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service B",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "Item.attribute1;",
+        "Item.attribute2;",
+        "Item.attribute3;",
+        "Item.attribute4;",
+        "Item.attribute5;",
+        "Item.itemId",
+        "Item.listPrice;",
+        "Item.product;",
+        "Item.productId;",
+        "Item.quantity;",
+        "Item.status;",
+        "Item.supplierId;",
+        "Item.unitCost;"
+      ],
+      "direction": "BIDIRECTIONAL"
+    }
+  ],
+  "useCaseResponsibility": {
+    "Service A": [
+      "viewCategory",
+      "getCategoryId",
+      "setCategoryId",
+      "setCategoryList"
+    ],
+    "Service B": [
+      "getItemList",
+      "getOrderId",
+      "viewOrder",
+      "getItemId",
+      "setItemList",
+      "setItemId",
+      "setOrder",
+      "setProductId"
+    ],
+    "Service C": [
+      "updateCartQuantities",
+      "addItemToCart",
+      "viewCart",
+      "viewItem",
+      "getProductList",
+      "searchProducts",
+      "setProductList",
+      "getProductId",
+      "removeItemFromCart"
+    ],
+    "Service D": [
+      "getAccount",
+      "newAccount",
+      "editAccount"
+    ]
+  }
+}

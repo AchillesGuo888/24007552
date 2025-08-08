@@ -1,0 +1,152 @@
+operations:
+- name: CreateCustomer
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CustomerInfo
+    write_attributes:
+    - customerId
+    - phoneNumber
+    - ssn
+  - entity_name: Name
+    write_attributes:
+    - firstName    
+    - lastName
+  - entity_name: UserCredentials
+    write_attributes:
+    - email    
+    - password
+  - entity_name: Address
+    write_attributes:
+    - street1    
+    - street2
+    - city
+    - state
+    - zipCode
+- name: GetCustomer
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CustomerInfo
+    read_attributes:
+    - customerId
+    - phoneNumber
+    - ssn
+  - entity_name: Name
+    read_attributes:
+    - firstName    
+    - lastName
+  - entity_name: UserCredentials
+    read_attributes:
+    - email    
+    - password
+  - entity_name: Address
+    read_attributes:
+    - street1    
+    - street2
+    - city
+    - state
+    - zipCode
+- name: AddCustomerToAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CustomerInfo
+    read_attributes:
+    - customerId
+  - entity_name: ToAccountInfo
+    write_attributes:
+    - description    
+    - title
+    - owner
+    - id 
+- name: deleteCustomerToAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: CustomerInfo
+    read_attributes:
+    - customerId
+  - entity_name: ToAccountInfo
+    read_attributes:
+    - id
+- name: GetAccountsForCustomer
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: AccountInfo
+    read_attributes:
+    - accountId
+    - balance
+    - title
+    - description
+    - customerId
+- name: GetAccounts
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: AccountInfo
+    read_attributes:
+    - accountId
+    - balance
+    - title
+    - description
+- name: GetTransactionsHistory
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: AccountInfo
+    read_attributes:
+    - creationDate
+    - balance
+  - entity_name: AccountHistoryEntry
+    read_attributes:
+    - entryType
+  - entity_name: AccountTransactionInfo
+    read_attributes:
+    - transactionId
+    - fromAccountId
+    - toAccountId
+    - amount
+    - description
+    - transferState
+- name: CreateAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: AccountInfo
+    read_attributes:
+    - accountId
+    - customerId
+    - title
+    - description
+    - balance
+    - creationDate
+- name: DeleteAccount
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: AccountInfo
+    read_attributes:
+    - accountId
+- name: CreateMoneyTransfer
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: TransferDetails
+    write_attributes:
+    - fromAccountId
+    - toAccountId
+    - amount
+    - date
+    - description

@@ -1,0 +1,4 @@
+money;Event;2
+money;Action;1
+money;FinancialProduct;3
+money;Service;3

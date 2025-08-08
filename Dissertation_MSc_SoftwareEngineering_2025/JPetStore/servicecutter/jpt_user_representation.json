@@ -1,0 +1,265 @@
+{
+    "useCases": [
+      {
+        "name": "CreateAccount",
+        "nanoentitiesRead": [],
+        "nanoentitiesWritten": [
+          "Account.username",
+          "Account.password",
+          "Account.email",
+          "Account.firstName",
+          "Account.lastName",
+          "Account.status",
+          "Account.address1",
+          "Account.address2",
+          "Account.city",
+          "Account.state",
+          "Account.zip",
+          "Account.country",
+          "Account.phone",
+          "Account.favouriteCategoryId",
+          "Account.languagePreference",
+          "Account.listOption",
+          "Account.bannerOption",
+          "Account.bannerName"
+        ]
+      },
+      {
+        "name": "UpdateAccount",
+        "nanoentitiesRead": ["Account.username"],
+        "nanoentitiesWritten": [
+          "Account.password",
+          "Account.email",
+          "Account.firstName",
+          "Account.lastName",
+          "Account.status",
+          "Account.address1",
+          "Account.address2",
+          "Account.city",
+          "Account.state",
+          "Account.zip",
+          "Account.country",
+          "Account.phone",
+          "Account.favouriteCategoryId",
+          "Account.languagePreference",
+          "Account.listOption",
+          "Account.bannerOption",
+          "Account.bannerName"
+        ]
+      },
+      {
+        "name": "SignIn",
+        "nanoentitiesRead": ["Account.username", "Account.password"],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "SignOut",
+        "nanoentitiesRead": ["Account.username"],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "ViewCategory",
+        "nanoentitiesRead": ["Product.productId", "Product.name"],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "ViewProduct",
+        "nanoentitiesRead": [
+          "Item.itemId",
+          "Product.productId",
+          "Product.name",
+          "Item.attribute1",
+          "Item.attribute2",
+          "Item.attribute3",
+          "Item.attribute4",
+          "Item.attribute5",
+          "Item.listPrice"
+        ],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "ViewItem",
+        "nanoentitiesRead": [
+          "Item.itemId",
+          "Item.productId",
+          "Item.listPrice",
+          "Item.unitCost",
+          "Item.supplierId",
+          "Item.status",
+          "Item.attribute1",
+          "Item.attribute2",
+          "Item.attribute3",
+          "Item.attribute4",
+          "Item.attribute5",
+          "Item.quantity",
+          "Product.productId",
+          "Product.name"
+        ],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "SearchForProducts",
+        "nanoentitiesRead": [
+          "Product.productId",
+          "Product.name",
+          "Product.description"
+        ],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "AddItemToCart",
+        "nanoentitiesRead": [
+          "CartItem.inStock",
+          "Product.productId",
+          "Item.itemId",
+          "Item.attribute1",
+          "Item.attribute2",
+          "Item.attribute3",
+          "Item.attribute4",
+          "Item.attribute5",
+          "Item.quantity",
+          "Item.listPrice"
+        ],
+        "nanoentitiesWritten": [
+          "CartItem.quantity",
+          "CartItem.item",
+          "CartItem.total"
+        ]
+      },
+      {
+        "name": "UpdateCart",
+        "nanoentitiesRead": [ "CartItem.item", "CartItem.inStock"],
+        "nanoentitiesWritten": ["CartItem.quantity", "CartItem.total"]
+      },
+      {
+        "name": "RemoveItemFromCart",
+        "nanoentitiesRead": [],
+        "nanoentitiesWritten": ["CartItem.item"]
+      },
+      {
+        "name": "ViewItemInCart",
+        "nanoentitiesRead": [
+          "Product.productId",
+          "Item.itemId",
+          "Item.attribute1",
+          "Item.attribute2",
+          "Item.attribute3",
+          "Item.attribute4",
+          "Item.attribute5",
+          "Item.quantity",
+          "Item.listPrice",
+          "CartItem.total",
+          "CartItem.quantity",
+          "CartItem.item",
+          "CartItem.inStock",
+          "CartItem.total"
+        ],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "CheckOut",
+        "nanoentitiesRead": [
+          "CartItem.total",
+          "CartItem.quantity",
+          "CartItem.item",
+          "CartItem.inStock",
+          "CartItem.total"
+        ],
+        "nanoentitiesWritten": [
+          "LineItem.orderId",
+          "LineItem.lineNumber",
+          "LineItem.quantity",
+          "LineItem.itemId",
+          "LineItem.unitPrice",
+          "LineItem.item",
+          "LineItem.total"
+        ]
+      },
+      {
+        "name": "CreateOrder",
+        "nanoentitiesRead": ["Account.username"],
+        "nanoentitiesWritten": [
+          "Order.orderId",
+          "Order.username",
+          "Order.orderDate",
+          "Order.shipAddress1",
+          "Order.shipAddress2",
+          "Order.shipCity",
+          "Order.shipState",
+          "Order.shipZip",
+          "Order.shipCountry",
+          "Order.billAddress1",
+          "Order.billAddress2",
+          "Order.billCity",
+          "Order.billState",
+          "Order.billZip",
+          "Order.billCountry",
+          "Order.courier",
+          "Order.totalPrice",
+          "Order.billToFirstName",
+          "Order.billToLastName",
+          "Order.shipToFirstName",
+          "Order.shipToLastName",
+          "Order.creditCard",
+          "Order.expiryDate",
+          "Order.cardType",
+          "Order.locale",
+          "Order.status"
+        ]
+      },
+      {
+        "name": "ViewOrder",
+        "nanoentitiesRead": [
+          "Order.orderId",
+          "Order.username",
+          "Order.orderDate",
+          "Order.shipAddress1",
+          "Order.shipAddress2",
+          "Order.shipCity",
+          "Order.shipState",
+          "Order.shipZip",
+          "Order.shipCountry",
+          "Order.billAddress1",
+          "Order.billAddress2",
+          "Order.billCity",
+          "Order.billState",
+          "Order.billZip",
+          "Order.billCountry",
+          "Order.courier",
+          "Order.totalPrice",
+          "Order.billToFirstName",
+          "Order.billToLastName",
+          "Order.shipToFirstName",
+          "Order.shipToLastName",
+          "Order.creditCard",
+          "Order.expiryDate",
+          "Order.cardType",
+          "Order.locale",
+          "Order.status",
+          "Product.productId",
+          "Item.itemId",
+          "Item.attribute1",
+          "Item.attribute2",
+          "Item.attribute3",
+          "Item.attribute4",
+          "Item.attribute5",
+          "Item.quantity",
+          "Item.listPrice",
+          "CartItem.total",
+          "CartItem.quantity",
+          "CartItem.item",
+          "CartItem.total"
+        ],
+        "nanoentitiesWritten": []
+      },
+      {
+        "name": "ListAllOrders",
+        "nanoentitiesRead": [
+          "Order.orderId",
+          "Order.orderDate",
+          "LineItem.total"
+        ],
+        "nanoentitiesWritten": []
+      }
+    ]
+  }

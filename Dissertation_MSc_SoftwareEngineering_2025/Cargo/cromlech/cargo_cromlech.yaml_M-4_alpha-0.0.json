@@ -1,0 +1,43 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "CarrierMovement.arrivalLocation",
+        "CarrierMovement.arrivalTime",
+        "CarrierMovement.departureLocation",
+        "CarrierMovement.departureTime",
+        "Delivery.estimatedArrivalTime",
+        "Delivery.misdirected",
+        "Delivery.routingStatus",
+        "Delivery.transportStatus",
+        "HandlingEvent.completionTime",
+        "HandlingEvent.location",
+        "HandlingEvent.type",
+        "Itinerary.itineraryNumber",
+        "Location.unLocode",
+        "RouteSpecification.arrivalDeadline",
+        "RouteSpecification.destination",
+        "RouteSpecification.origin",
+        "Voyage.voyageNumber"
+      ],
+      "id": "A",
+      "name": "Service A"
+    }
+  ],
+  "relations": [],
+  "useCaseResponsibility": {
+    "Service A": [
+      "ViewTracking",
+      "ViewCargos",
+      "BookCargo",
+      "ChangeCargoDestination",
+      "RouteCargo",
+      "Create Location",
+      "Create Voyage",
+      "AddCarrierMovement",
+      "handleCargoEvent"
+    ]
+  }
+}

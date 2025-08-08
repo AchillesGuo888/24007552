@@ -1,0 +1,5 @@
+cargo;Intangible;2
+cargo;LocalBusiness;1
+cargo;StructuredValue;1
+cargo;Organization;1
+cargo;Action;2

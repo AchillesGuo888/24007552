@@ -1,0 +1,19 @@
+{
+    "serviceName":"money_decomposer",
+    "operations":[
+        {"name":"CreateCustomer"},
+        {"name":"GetCustomer"},
+        {"name":"AddCustomerToAccount"},
+        {"name":"deleteCustomerToAccount"},
+        {"name":"GetAccountsForCustomer"},
+        {"name":"GetAccounts"},
+        {"name":"GetTransactionsHistory"},
+        {"name":"CreateAccount"},
+        {"name":"DeleteAccount"},
+        {"name":"CreateMoneyTransfer"}
+    ],
+    "resources": [
+    {"name":"meta"},
+    {"name":"data"}
+    ]
+}

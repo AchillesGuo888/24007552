@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 2500px;
+                 background-color: #dddddd;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"group": 2, "id": "CreateOrder", "label": "CreateOrder", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "ViewOrder", "label": "ViewOrder", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "ListAllOrders", "label": "ListAllOrders", "mass": 1.5, "shape": "dot", "size": 9.2}, {"group": 2, "id": "Account.username@2", "label": "Account.username@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.item@2", "label": "CartItem.item@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.quantity@2", "label": "CartItem.quantity@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "CartItem.total@2", "label": "CartItem.total@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute1@2", "label": "Item.attribute1@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute2@2", "label": "Item.attribute2@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute3@2", "label": "Item.attribute3@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute4@2", "label": "Item.attribute4@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.attribute5@2", "label": "Item.attribute5@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.itemId@2", "label": "Item.itemId@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.listPrice@2", "label": "Item.listPrice@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Item.quantity@2", "label": "Item.quantity@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "LineItem.total@2", "label": "LineItem.total@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billAddress1@2", "label": "Order.billAddress1@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billAddress2@2", "label": "Order.billAddress2@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billCity@2", "label": "Order.billCity@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billCountry@2", "label": "Order.billCountry@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billState@2", "label": "Order.billState@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billToFirstName@2", "label": "Order.billToFirstName@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billToLastName@2", "label": "Order.billToLastName@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.billZip@2", "label": "Order.billZip@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.cardType@2", "label": "Order.cardType@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.courier@2", "label": "Order.courier@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.creditCard@2", "label": "Order.creditCard@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.expiryDate@2", "label": "Order.expiryDate@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.locale@2", "label": "Order.locale@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.orderDate@2", "label": "Order.orderDate@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.orderId@2", "label": "Order.orderId@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipAddress1@2", "label": "Order.shipAddress1@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipAddress2@2", "label": "Order.shipAddress2@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipCity@2", "label": "Order.shipCity@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipCountry@2", "label": "Order.shipCountry@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipState@2", "label": "Order.shipState@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipToFirstName@2", "label": "Order.shipToFirstName@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipToLastName@2", "label": "Order.shipToLastName@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.shipZip@2", "label": "Order.shipZip@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.status@2", "label": "Order.status@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.totalPrice@2", "label": "Order.totalPrice@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Order.username@2", "label": "Order.username@2", "mass": 1.5, "shape": "square", "size": 8}, {"group": 2, "id": "Product.productId@2", "label": "Product.productId@2", "mass": 1.5, "shape": "square", "size": 8}]);
+                  edges = new vis.DataSet([{"from": "CreateOrder", "to": "Account.username@2"}, {"from": "CreateOrder", "to": "Order.orderId@2"}, {"from": "CreateOrder", "to": "Order.username@2"}, {"from": "CreateOrder", "to": "Order.orderDate@2"}, {"from": "CreateOrder", "to": "Order.shipAddress1@2"}, {"from": "CreateOrder", "to": "Order.shipAddress2@2"}, {"from": "CreateOrder", "to": "Order.shipCity@2"}, {"from": "CreateOrder", "to": "Order.shipState@2"}, {"from": "CreateOrder", "to": "Order.shipZip@2"}, {"from": "CreateOrder", "to": "Order.shipCountry@2"}, {"from": "CreateOrder", "to": "Order.billAddress1@2"}, {"from": "CreateOrder", "to": "Order.billAddress2@2"}, {"from": "CreateOrder", "to": "Order.billCity@2"}, {"from": "CreateOrder", "to": "Order.billState@2"}, {"from": "CreateOrder", "to": "Order.billZip@2"}, {"from": "CreateOrder", "to": "Order.billCountry@2"}, {"from": "CreateOrder", "to": "Order.courier@2"}, {"from": "CreateOrder", "to": "Order.totalPrice@2"}, {"from": "CreateOrder", "to": "Order.billToFirstName@2"}, {"from": "CreateOrder", "to": "Order.billToLastName@2"}, {"from": "CreateOrder", "to": "Order.shipToFirstName@2"}, {"from": "CreateOrder", "to": "Order.shipToLastName@2"}, {"from": "CreateOrder", "to": "Order.creditCard@2"}, {"from": "CreateOrder", "to": "Order.expiryDate@2"}, {"from": "CreateOrder", "to": "Order.cardType@2"}, {"from": "CreateOrder", "to": "Order.locale@2"}, {"from": "CreateOrder", "to": "Order.status@2"}, {"from": "ViewOrder", "to": "Order.orderId@2"}, {"from": "ViewOrder", "to": "Order.username@2"}, {"from": "ViewOrder", "to": "Order.orderDate@2"}, {"from": "ViewOrder", "to": "Order.shipAddress1@2"}, {"from": "ViewOrder", "to": "Order.shipAddress2@2"}, {"from": "ViewOrder", "to": "Order.shipCity@2"}, {"from": "ViewOrder", "to": "Order.shipState@2"}, {"from": "ViewOrder", "to": "Order.shipZip@2"}, {"from": "ViewOrder", "to": "Order.shipCountry@2"}, {"from": "ViewOrder", "to": "Order.billAddress1@2"}, {"from": "ViewOrder", "to": "Order.billAddress2@2"}, {"from": "ViewOrder", "to": "Order.billCity@2"}, {"from": "ViewOrder", "to": "Order.billState@2"}, {"from": "ViewOrder", "to": "Order.billZip@2"}, {"from": "ViewOrder", "to": "Order.billCountry@2"}, {"from": "ViewOrder", "to": "Order.courier@2"}, {"from": "ViewOrder", "to": "Order.totalPrice@2"}, {"from": "ViewOrder", "to": "Order.billToFirstName@2"}, {"from": "ViewOrder", "to": "Order.billToLastName@2"}, {"from": "ViewOrder", "to": "Order.shipToFirstName@2"}, {"from": "ViewOrder", "to": "Order.shipToLastName@2"}, {"from": "ViewOrder", "to": "Order.creditCard@2"}, {"from": "ViewOrder", "to": "Order.expiryDate@2"}, {"from": "ViewOrder", "to": "Order.cardType@2"}, {"from": "ViewOrder", "to": "Order.locale@2"}, {"from": "ViewOrder", "to": "Order.status@2"}, {"from": "ViewOrder", "to": "Product.productId@2"}, {"from": "ViewOrder", "to": "Item.itemId@2"}, {"from": "ViewOrder", "to": "Item.attribute1@2"}, {"from": "ViewOrder", "to": "Item.attribute2@2"}, {"from": "ViewOrder", "to": "Item.attribute3@2"}, {"from": "ViewOrder", "to": "Item.attribute4@2"}, {"from": "ViewOrder", "to": "Item.attribute5@2"}, {"from": "ViewOrder", "to": "Item.quantity@2"}, {"from": "ViewOrder", "to": "Item.listPrice@2"}, {"from": "ViewOrder", "to": "CartItem.total@2"}, {"from": "ViewOrder", "to": "CartItem.quantity@2"}, {"from": "ViewOrder", "to": "CartItem.item@2"}, {"from": "ListAllOrders", "to": "Order.orderId@2"}, {"from": "ListAllOrders", "to": "Order.orderDate@2"}, {"from": "ListAllOrders", "to": "LineItem.total@2"}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+[view, category];ViewAction;0.9136842;
+[view, product];ProductModel;0.8328728;
+[view, item];ViewAction;0.8889915;
+[search, products];ProductModel;0.84593123;
+[item, cart];ItemAvailability;0.95731413;
+[remove, item, cart];ItemListOrderType;1.7708328;
+[cart, quantities];TypeAndQuantityNode;1.0310854;
+[view, cart];ViewAction;0.9838057;
+[check];CheckAction;0.1;
+[orders];Order;0.0;
+[new, order];OrderAction;1.0;
+[view, order];OrderAction;0.810037;
+[new, account];DepositAccount;1.0;
+[edit, account];DepositAccount;1.0;
+[signon];ReadAction;1.0;
+[signoff];ReadAction;1.0;
+[authenticated];ReadAction;1.0;
