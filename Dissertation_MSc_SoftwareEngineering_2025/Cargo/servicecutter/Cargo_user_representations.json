@@ -66,12 +66,12 @@
       ]
     },
     {
-      "name": "Create Location",
+      "name": "CreateLocation",
       "nanoentitiesRead": [],
       "nanoentitiesWritten": ["Location.unLocode", "Location.name"]
     },
     {
-      "name": "Create Voyage",
+      "name": "CreateVoyage",
       "nanoentitiesRead": [],
       "nanoentitiesWritten": ["Voyage.voyageNumber"]
     },
