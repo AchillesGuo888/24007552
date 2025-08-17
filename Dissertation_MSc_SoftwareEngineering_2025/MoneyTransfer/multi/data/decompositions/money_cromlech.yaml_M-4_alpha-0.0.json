@@ -1,0 +1,43 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "AccountInfo.accountId",
+        "AccountInfo.balance",
+        "AccountInfo.creationDate",
+        "AccountInfo.customerId",
+        "AccountInfo.description",
+        "AccountInfo.title",
+        "Address.city",
+        "Address.state",
+        "Address.street1",
+        "Address.street2",
+        "Address.zipCode",
+        "CustomerInfo.customerId",
+        "CustomerInfo.phoneNumber",
+        "CustomerInfo.ssn",
+        "Name.firstName",
+        "Name.lastName",
+        "ToAccountInfo.id",
+        "UserCredentials.email",
+        "UserCredentials.password"
+      ],
+      "id": "A",
+      "name": "Service A"
+    }
+  ],
+  "useCaseResponsibility": {
+    "Service A": [
+      "CreateCustomer",
+      "GetCustomer",
+      "AddCustomerToAccount",
+      "deleteCustomerToAccount",
+      "GetAccountsForCustomer",
+      "GetAccounts",
+      "GetTransactionsHistory",
+      "CreateAccount",
+      "DeleteAccount"
+    ]
+  }
+}

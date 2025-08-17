@@ -1,0 +1,28 @@
+
+entities_file: "data/money_model.json"
+
+
+operations_file: "data/money_cromlech.yaml"
+
+
+schemes_dir: "data/decompositions/"
+
+
+op_type_map:
+  CreateCustomer: "Create"
+  GetCustomer: "Read"
+  AddCustomerToAccount: "Create"
+  deleteCustomerToAccount: "Delete"
+  GetAccountsForCustomer: "Read"
+  GetAccounts: "Read"
+  GetTransactionsHistory: "Read"
+  CreateAccount: "Create"
+  DeleteAccount: "Delete"
+  CreateMoneyTransfer: "Create"
+
+
+op_weights:
+  Create: 4
+  Update: 3
+  Delete: 2
+  Read: 1

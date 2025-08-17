@@ -1,0 +1,89 @@
+{
+    "name":"jpt_decomposer_2_microvalid",
+    "services": [
+      {
+        "nanoentities": [
+            "Cargo.trackingId",
+            "HandlingEvent.type",
+            "HandlingEvent.location",
+            "HandlingEvent.completionTime",
+            "Delivery.transportStatus",
+            "Delivery.estimatedArrivalTime",
+            "Delivery.misdirected",
+            "Voyage.voyageNumber",
+            "RouteSpecification.destination",
+            "RouteSpecification.arrivalDeadline",
+            "Delivery.routingStatus",
+            "Itinerary.itineraryNumber"
+        ],
+        "id": "A",
+        "name": "Service A"
+      },
+      {
+        "nanoentities": [
+            "Location.unLocode",
+            "Cargo.trackingId",
+            "RouteSpecification.origin",
+            "RouteSpecification.arrivalDeadline",
+            "RouteSpecification.destination",
+            "Voyage.voyageNumber",
+            "CarrierMovement.departureLocation",
+            "CarrierMovement.arrivalLocation",
+            "CarrierMovement.departureTime",
+            "CarrierMovement.arrivalTime"
+        ],
+        "id": "B",
+        "name": "Service B"
+      },
+      {
+        "nanoentities": [
+            "Location.unLocode", 
+            "Location.name",
+            "Voyage.voyageNumber",
+            "Cargo.trackingId",
+            "HandlingEvent.type",
+            "HandlingEvent.completionTime",
+            "HandlingEvent.registrationTime",
+            "HandlingEvent.location",
+            "Delivery.transportStatus",
+            "Delivery.misdirected",
+            "Delivery.estimatedArrivalTime",
+            "Delivery.isUnloadedAtDestination",
+            "Delivery.routingStatus",
+            "RouteSpecification.destination",
+            "RouteSpecification.origin",
+            "RouteSpecification.arrivalDeadline",
+            "Location.unLocode",
+            "Voyage.voyageNumber",
+            "CarrierMovement.departureLocation",
+            "CarrierMovement.arrivalLocation",
+            "CarrierMovement.departureTime",
+            "CarrierMovement.arrivalTime",
+            "Itinerary.itineraryNumber",
+            "Leg.loadLocation",
+            "Leg.unloadLocation",
+            "Leg.loadTime",
+            "Leg.unloadTime"
+        ],
+        "id": "C",
+        "name": "Service C"
+      }
+    ],
+    "useCaseResponsibility": {
+      "Service A": [
+        "ViewTracking",
+        "ViewCargos"
+      ],
+      "Service B": [
+        "BookCargo",
+        "ChangeCargoDestination",
+        "AddCarrierMovement"
+      ],
+      "Service C": [
+        "CreateLocation",
+        "CreateVoyage",
+        "handleCargoEvent",
+        "RouteCargo"
+      ]
+    }
+  }

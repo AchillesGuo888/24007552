@@ -1,0 +1,151 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "Delivery.routingStatus",
+        "Itinerary.itineraryNumber",
+        "RouteSpecification.arrivalDeadline",
+        "RouteSpecification.destination"
+      ],
+      "id": "A",
+      "name": "Service A"
+    },
+    {
+      "nanoentities": [
+        "CarrierMovement.arrivalLocation",
+        "CarrierMovement.arrivalTime",
+        "CarrierMovement.departureLocation",
+        "CarrierMovement.departureTime",
+        "Voyage.voyageNumber"
+      ],
+      "id": "B",
+      "name": "Service B"
+    },
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "Delivery.estimatedArrivalTime",
+        "Delivery.misdirected",
+        "Delivery.routingStatus",
+        "Delivery.transportStatus",
+        "HandlingEvent.completionTime",
+        "HandlingEvent.location",
+        "HandlingEvent.type",
+        "RouteSpecification.destination",
+        "Voyage.voyageNumber"
+      ],
+      "id": "C",
+      "name": "Service C"
+    },
+    {
+      "nanoentities": [
+        "Cargo.trackingId",
+        "CarrierMovement.arrivalLocation",
+        "CarrierMovement.arrivalTime",
+        "CarrierMovement.departureLocation",
+        "CarrierMovement.departureTime",
+        "Itinerary.itineraryNumber",
+        "Location.unLocode",
+        "RouteSpecification.arrivalDeadline",
+        "RouteSpecification.destination",
+        "RouteSpecification.origin",
+        "Voyage.voyageNumber"
+      ],
+      "id": "D",
+      "name": "Service D"
+    }
+  ],
+  "relations": [
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "Delivery.routingStatus"
+      ],
+      "direction": "INCOMING"
+    },
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "Cargo.trackingId",
+        "Itinerary.itineraryNumber"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "RouteSpecification.arrivalDeadline",
+        "RouteSpecification.destination"
+      ],
+      "direction": "INCOMING"
+    },
+    {
+      "serviceA": "Service B",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "Voyage.voyageNumber"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service B",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "CarrierMovement.arrivalLocation",
+        "CarrierMovement.arrivalTime",
+        "CarrierMovement.departureLocation",
+        "CarrierMovement.departureTime",
+        "Voyage.voyageNumber"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service C",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "Cargo.trackingId"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service C",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "Voyage.voyageNumber"
+      ],
+      "direction": "OUTGOING"
+    },
+    {
+      "serviceA": "Service C",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "RouteSpecification.destination"
+      ],
+      "direction": "INCOMING"
+    }
+  ],
+  "useCaseResponsibility": {
+    "Service A": [
+      "ViewCargos",
+      "ChangeCargoDestination"
+    ],
+    "Service B": [
+      "AddCarrierMovement"
+    ],
+    "Service C": [
+      "ViewTracking",
+      "CreateVoyage",
+      "handleCargoEvent"
+    ],
+    "Service D": [
+      "BookCargo",
+      "RouteCargo",
+      "CreateLocation"
+    ]
+  }
+}

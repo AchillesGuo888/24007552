@@ -1,0 +1,33 @@
+
+entities_file: "data/jpt_model.json"
+
+
+operations_file: "data/jpt_cromlech_input.yaml"
+
+
+schemes_dir: "data/decompositions/"
+
+
+op_type_map:
+  CreateAccount: "Create"
+  UpdateAccount: "Update"
+  SignIn: "Read"
+  SignOut: "Read"
+  ViewCategory: "Read"
+  ViewProduct: "Read"
+  ViewItem: "Read"
+  SearchForProducts: "Read"
+  AddItemToCart: "Create"
+  UpdateCart: "Update"
+  RemoveItemFromCart: "Delete"
+  ViewItemInCart: "Read"
+  CheckOut: "Create"
+  CreateOrder: "Create"
+  ViewOrder: "Read"
+  ListAllOrders: "Read"
+
+op_weights:
+  Create: 4
+  Update: 3
+  Delete: 2
+  Read: 1

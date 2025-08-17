@@ -1,0 +1,89 @@
+{
+  "name": "jpet_cromlech",
+  "services": [
+    {
+      "nanoentities": [
+        "CustomerInfo.customerId",
+        "ToAccountInfo.id"
+      ],
+      "id": "A",
+      "name": "Service A"
+    },
+    {
+      "nanoentities": [
+        "AccountInfo.accountId",
+        "AccountInfo.balance",
+        "AccountInfo.creationDate",
+        "AccountInfo.customerId",
+        "AccountInfo.description",
+        "AccountInfo.title"
+      ],
+      "id": "B",
+      "name": "Service B"
+    },
+    {
+      "nanoentities": [
+        "AccountInfo.balance",
+        "AccountInfo.creationDate"
+      ],
+      "id": "C",
+      "name": "Service C"
+    },
+    {
+      "nanoentities": [
+        "Address.city",
+        "Address.state",
+        "Address.street1",
+        "Address.street2",
+        "Address.zipCode",
+        "CustomerInfo.customerId",
+        "CustomerInfo.phoneNumber",
+        "CustomerInfo.ssn",
+        "Name.firstName",
+        "Name.lastName",
+        "UserCredentials.email",
+        "UserCredentials.password"
+      ],
+      "id": "D",
+      "name": "Service D"
+    }
+  ],
+  "relations": [
+    {
+      "serviceA": "Service A",
+      "serviceB": "Service D",
+      "sharedEntities": [
+        "CustomerInfo.customerId"
+      ],
+      "direction": "BIDIRECTIONAL"
+    },
+    {
+      "serviceA": "Service B",
+      "serviceB": "Service C",
+      "sharedEntities": [
+        "AccountInfo.balance",
+        "AccountInfo.creationDate"
+      ],
+      "direction": "BIDIRECTIONAL"
+    }
+  ],
+  "useCaseResponsibility": {
+    "Service A": [
+      "AddCustomerToAccount",
+      "deleteCustomerToAccount"
+    ],
+    "Service B": [
+      "GetAccountsForCustomer",
+      "GetAccounts",
+      "CreateAccount",
+      "DeleteAccount"
+    ],
+    "Service C": [
+      "GetTransactionsHistory"
+    ],
+    "Service D": [
+      "CreateCustomer",
+      "GetCustomer"
+    ]
+  }
+}

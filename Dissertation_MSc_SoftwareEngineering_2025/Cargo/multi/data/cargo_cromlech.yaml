@@ -1,0 +1,159 @@
+operations:
+- name: ViewTracking
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Cargo
+    read_attributes:
+    - trackingId
+  - entity_name: HandlingEvent
+    read_attributes:
+    - type
+    - location
+    - completionTime
+  - entity_name: Delivery
+    read_attributes:
+    - transportStatus
+    - estimatedArrivalTime
+    - misdirected
+  - entity_name: Voyage
+    read_attributes:
+    - voyageNumber
+  - entity_name: RouteSpecification
+    read_attributes:
+    - destination
+- name: ViewCargos
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Cargo
+    read_attributes:
+    - trackingId
+  - entity_name: RouteSpecification
+    read_attributes:
+    - destination
+    - arrivalDeadline
+  - entity_name: Delivery
+    read_attributes:
+    - routingStatus
+  - entity_name: Itinerary
+    read_attributes:
+    - itineraryNumber
+- name: BookCargo
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Location
+    read_attributes:
+    - unLocode
+  - entity_name: Cargo
+    write_attributes:
+    - trackingId
+  - entity_name: RouteSpecification
+    write_attributes:
+    - origin
+    - arrivalDeadline
+    - destination
+- name: ChangeCargoDestination
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Cargo
+    read_attributes:
+    - trackingId
+  - entity_name: RouteSpecification
+    write_attributes:
+    - destination
+- name: RouteCargo
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Cargo
+    read_attributes:
+    - trackingId
+  - entity_name: RouteSpecification
+    read_attributes:
+    - destination
+    - origin
+    - arrivalDeadline
+  - entity_name: Location
+    read_attributes:
+    - unLocode
+  - entity_name: Voyage
+    read_attributes:
+    - voyageNumber
+  - entity_name: CarrierMovement
+    read_attributes:
+    - departureLocation
+    - arrivalLocation
+    - departureTime
+    - arrivalTime
+  - entity_name: Itinerary
+    write_attributes:
+    - itineraryNumber
+  - entity_name: Leg
+    write_attributes:
+    - loadLocation
+    - unloadLocation
+    - loadTime
+    - unloadTime
+- name: CreateLocation
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Location
+    write_attributes:
+    - unLocode
+    - name
+- name: CreateVoyage
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Voyage
+    write_attributes:
+    - voyageNumber
+- name: AddCarrierMovement
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Voyage
+    read_attributes:
+    - voyageNumber
+  - entity_name: CarrierMovement
+    write_attributes:
+    - departureLocation
+    - arrivalLocation
+    - departureTime
+    - arrivalTime
+- name: handleCargoEvent
+  consistency: L
+  frequency: 1
+  forced_operations: []
+  database_access:
+  - entity_name: Voyage
+    read_attributes:
+    - voyageNumber
+  - entity_name: Cargo
+    read_attributes:
+    - trackingId
+  - entity_name: HandlingEvent
+    write_attributes:
+    - type
+    - completionTime
+    - registrationTime
+    - location
+  - entity_name: Delivery
+    write_attributes:
+    - transportStatus
+    - misdirected
+    - estimatedArrivalTime
+    - isUnloadedAtDestination
+    - routingStatus

@@ -1,0 +1,39 @@
+
+entities_file: "data/cargo_model.json"
+
+
+operations_file: "data/cargo_cromlech.yaml"
+
+
+schemes_dir: "data/decompositions/"
+
+
+op_type_map:
+  CreateAccount: "Create"
+  AddItemToCart: "Create"
+  CheckOut: "Create"
+  CreateOrder: "Create"
+    
+
+  UpdateAccount: "Update"
+  UpdateCart: "Update"
+    
+
+  RemoveItemFromCart: "Delete"
+    
+
+  SignIn: "Read"
+  SignOut: "Read"
+  ViewCategory: "Read"
+  ViewProduct: "Read"
+  ViewItem: "Read"
+  SearchForProducts: "Read"
+  ViewItemInCart: "Read"
+  ViewOrder: "Read"
+  ListAllOrders: "Read"
+
+op_weights:
+  Create: 4
+  Update: 3
+  Delete: 2
+  Read: 1

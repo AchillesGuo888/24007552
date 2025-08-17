@@ -1,0 +1,58 @@
+{
+    "name": "money_decomposer",
+    "services":[
+        {
+            "nanoentities": ["CustomerInfo.customerId", 
+                "Name.firstName",
+                "Name.lastName", 
+                "UserCredentials.email", 
+                "UserCredentials.password",
+                "CustomerInfo.phoneNumber", 
+                "CustomerInfo.ssn", 
+                "Address.street1",
+                "Address.street2", 
+                "Address.city", 
+                "Address.state", 
+                "Address.zipCode"],
+            "id": "A",
+            "name": "Service A"
+        },{
+            "nanoentities": [
+                "CustomerInfo.customerId",
+                "ToAccountInfo.description", 
+                "ToAccountInfo.title",
+                "ToAccountInfo.owner", 
+                "ToAccountInfo.id",
+                "AccountInfo.accountId", 
+                "AccountInfo.balance",
+                "AccountInfo.title", 
+                "AccountInfo.description", 
+                "AccountInfo.customerId",
+                "AccountInfo.creationDate",
+                "AccountHistoryEntry.entryType",
+                "AccountTransactionInfo.transactionId", 
+                "AccountTransactionInfo.fromAccountId",
+                "AccountTransactionInfo.toAccountId", 
+                "AccountTransactionInfo.amount",
+                "AccountTransactionInfo.description", 
+                "AccountTransactionInfo.transferState"
+            ],
+            "id": "B",
+            "name": "Service B"
+        },{
+            "nanoentities": ["TransferDetails.fromAccountId",
+                "TransferDetails.toAccountId", 
+                "TransferDetails.amount",
+                "TransferDetails.date", 
+                "TransferDetails.description"],
+            "id": "C",
+            "name": "Service C"
+        }
+    ],
+    "useCaseResponsibility": {
+		"Service A": ["CreateCustomer", "GetCustomer"],
+		"Service B": ["AddCustomerToAccount","deleteCustomerToAccount","GetAccountsForCustomer","GetAccounts","GetTransactionsHistory","CreateAccount","DeleteAccount"],
+		"Service C": ["CreateMoneyTransfer"]
+	}
+
+}
